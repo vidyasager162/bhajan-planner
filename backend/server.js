@@ -1,3 +1,5 @@
+import { url, username, password } from "../settings";
+
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -19,7 +21,7 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb://127.0.0.1:27017/BhajanDB");
+mongoose.connect(url + "BhajanDB");
 
 const memberSchema = new mongoose.Schema({
   username: String,
@@ -37,21 +39,21 @@ const Members = mongoose.model("member", memberSchema);
 const Bhajans = mongoose.model("bhajan", bhajanSchema);
 
 Members.find({}).then(async (memberFound) => {
-  const hashedPassword = await bcrypt.hash("2732", saltRounds);
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
   if (memberFound.length === 0) {
     Members.create({
-      username: "admin",
+      username: username,
       password: hashedPassword,
     });
   }
 });
 
 app.get("/check-admin", async (req, res) => {
-  const hashedPassword = await bcrypt.hash("2732", saltRounds);
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
   Members.findOne({ username: "admin" }).then((memberFound) => {
     if (!memberFound) {
       Members.create({
-        username: "admin",
+        username: username,
         password: hashedPassword,
       });
     }
