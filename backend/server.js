@@ -21,14 +21,42 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect("mongodb://127.0.0.1:27017/BhajanDB");
 
+const memberSchema = new mongoose.Schema({
+  username: String,
+  password: String,
+  cookieID: String,
+});
+
 const bhajanSchema = new mongoose.Schema({
   bhajan_no: Number,
   bhajan_name: String,
   sruthi: String,
-  bhajan_deity: String,
 });
 
+const Members = mongoose.model("member", memberSchema);
 const Bhajans = mongoose.model("bhajan", bhajanSchema);
+
+Members.find({}).then(async (memberFound) => {
+  const hashedPassword = await bcrypt.hash("2732", saltRounds);
+  if (memberFound.length === 0) {
+    Members.create({
+      username: "admin",
+      password: hashedPassword,
+    });
+  }
+});
+
+app.get("/check-admin", async (req, res) => {
+  const hashedPassword = await bcrypt.hash("2732", saltRounds);
+  Members.findOne({ username: "admin" }).then((memberFound) => {
+    if (!memberFound) {
+      Members.create({
+        username: "admin",
+        password: hashedPassword,
+      });
+    }
+  });
+});
 
 app.post("/add-bhajan", (req, res) => {
   console.log(req.body);
@@ -38,7 +66,6 @@ app.post("/add-bhajan", (req, res) => {
       bhajan_no: number,
       bhajan_name: req.body.bhajan_name,
       sruthi: req.body.sruthi,
-      bhajan_deity: req.body.bhajan_deity,
     }).then((success) => {
       if (success) {
         res.status(200).json();
