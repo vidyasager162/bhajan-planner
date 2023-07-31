@@ -50,7 +50,7 @@ Members.find({}).then(async (memberFound) => {
 
 app.get("/check-admin", async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, saltRounds);
-  Members.findOne({ username: "admin" }).then((memberFound) => {
+  Members.findOne({ username: username }).then((memberFound) => {
     if (!memberFound) {
       Members.create({
         username: username,
