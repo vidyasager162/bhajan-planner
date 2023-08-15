@@ -1,4 +1,8 @@
-import { url, username, password } from "../settings";
+// import { url, username, password } from "../settings";
+
+const url = "mongodb://127.0.0.1:27017/";
+const username = "admin";
+const password = "2732";
 
 const express = require("express");
 const cors = require("cors");
