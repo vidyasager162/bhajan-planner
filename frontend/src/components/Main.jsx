@@ -6,17 +6,17 @@ function Main() {
     alert("Clicked!!");
   }
   return (
-    <div className="container-fluid">
+    <div className="container">
       <div className="row main-container">
         <div className="col main-options">
-          <Card title="Bhajans" clicked={clicked} />
+          <Card title="Bhajans Sung" clicked={clicked} />
         </div>
-        <div className="col main-options">
+        {/* <div className="col main-options">
           <Card title="Deities" clicked={clicked} />
         </div>
         <div className="col main-options">
           <Card title="I Dont know" clicked={clicked} />
-        </div>
+        </div> */}
       </div>
     </div>
   );
