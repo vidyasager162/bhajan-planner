@@ -64,22 +64,53 @@ app.get("/check-admin", async (req, res) => {
   });
 });
 
-app.post("/add-bhajan", (req, res) => {
-  console.log(req.body);
+app.post("/add-cohort", (req, res) => {
+  let number;
   Bhajans.countDocuments({}).then((count) => {
-    var number = count + 1;
-    Bhajans.create({
-      bhajan_no: number,
-      bhajan_name: req.body.bhajan_name,
-      sruthi: req.body.sruthi,
-    }).then((success) => {
-      if (success) {
-        res.status(200).json();
-        console.log("Successfully added the Bhajan.");
-      }
-    });
+    if (count === 0) {
+      number = count + 1;
+    } else {
+      number = count;
+    }
+    console.log(count);
   });
+  for (let i = 0; i < req.body.payload.length; i++) {
+    Bhajans.findOne({ bhajan_name: req.body.payload[i].bhajan_Name }).then(
+      async (err, bhajanFound) => {
+        if (err) throw err;
+        if (bhajanFound) {
+          console.log("bhajan already exists");
+        } else {
+          Bhajans.create({
+            bhajan_no: number + i,
+            bhajan_name: req.body.payload[i].bhajan_name,
+            sruthi: req.body.payload[i].sruthi,
+          }).then(() => {
+            // console.log("Added Bhajan Succesfully");
+          });
+        }
+      }
+    );
+  }
+  res.send({ message: "success" });
 });
+
+// app.post("/add-bhajan", (req, res) => {
+//   console.log(req.body);
+//   Bhajans.countDocuments({}).then((count) => {
+//     var number = count + 1;
+//     Bhajans.create({
+//       bhajan_no: number,
+//       bhajan_name: req.body.bhajan_name,
+//       sruthi: req.body.sruthi,
+//     }).then((success) => {
+//       if (success) {
+//         res.status(200).json();
+//         console.log("Successfully added the Bhajan.");
+//       }
+//     });
+//   });
+// });
 
 app.listen(8000, () => {
   console.log("Server is running on port 8000.");

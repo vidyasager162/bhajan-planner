@@ -5,6 +5,7 @@ function Footer(props) {
   const nowRef = new Date().getHours();
 
   const [time, setTime] = useState(now);
+  // eslint-disable-next-line
   const [refTime, setRefTime] = useState(nowRef);
 
   function updateTime() {

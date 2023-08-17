@@ -7,16 +7,12 @@ function Main() {
   }
   return (
     <div className="container">
-      <div className="row main-container">
+      <div className="row m-0 main-container">
         <div className="col main-options">
           <Card title="Bhajans Sung" clicked={clicked} />
-        </div>
-        {/* <div className="col main-options">
-          <Card title="Deities" clicked={clicked} />
-        </div>
-        <div className="col main-options">
+          <Card title="All Bhajans" clicked={clicked} />
           <Card title="I Dont know" clicked={clicked} />
-        </div> */}
+        </div>
       </div>
     </div>
   );

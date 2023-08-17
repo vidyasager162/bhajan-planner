@@ -2,8 +2,8 @@ import React from "react";
 
 function Card(props) {
   return (
-    <div className="card h-100" onClick={props.clicked}>
-      <div className="card-body">
+    <div className="card w-50 mx-auto" onClick={props.clicked}>
+      <div className="card-body text-center">
         <h5 className="card-title">{props.title}</h5>
       </div>
     </div>

@@ -23,7 +23,38 @@ function Header() {
                 Home
               </button>
             </li>
+            <li className="nav-item">
+              <button type="button" className="btn btn-transparent">
+                Books
+              </button>
+            </li>
+            <li className="nav-item">
+              <button type="button" className="btn btn-transparent">
+                Authors
+              </button>
+            </li>
+            <li className="nav-item">
+              <button type="button" className="btn btn-transparent">
+                Publishers
+              </button>
+            </li>
+            <li className="nav-item">
+              <button type="button" className="btn btn-transparent">
+                Genres
+              </button>
+            </li>
           </ul>
+          <form className="d-flex" role="search">
+            <input
+              className="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button className="btn btn-outline-light" type="submit">
+              Search
+            </button>
+          </form>
         </div>
       </div>
     </nav>
