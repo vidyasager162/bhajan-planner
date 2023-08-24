@@ -3,6 +3,7 @@ import BhajanCard from "./BhajanCard";
 
 function AllBhajans() {
   const [bhajans, setBhajans] = useState();
+  const [message, setMessage] = useState();
   useEffect(() => {
     //eslint-disable-next-line
     getBhajans();
@@ -20,11 +21,12 @@ function AllBhajans() {
       .then((res) => res.json())
       .then((data) => {
         setBhajans(data.bhajans);
+        setMessage(data.message);
       });
   }
-  return (
+  return message ? (
     <div className="container">
-      <div className="row m-0 main-container">
+      <div className="row m-0 allbhajan-container">
         {bhajans.map((bhajan) => {
           return (
             <div className="col main-options">
@@ -34,7 +36,7 @@ function AllBhajans() {
         })}
       </div>
     </div>
-  );
+  ) : null;
 }
 
 export default AllBhajans;

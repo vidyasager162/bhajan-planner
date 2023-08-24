@@ -46,8 +46,13 @@ footer > p {
   pointer-events: none;
 }
 
+.allbhajan-container {
+  padding: 1rem;
+}
+
 .bhajan-card {
-  height: fit-content;
+  height: 8rem;
+  width: 20rem !important;
 }
 
 .card {

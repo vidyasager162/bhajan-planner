@@ -3,6 +3,7 @@ import Header from "./Header";
 import Main from "./Main";
 import Home from "./Home";
 import Footer from "./Footer";
+import AllBhajans from "./AllBhajans";
 // import uniqid from "uniqid";
 // import { useCookies } from "react-cookie";
 import Login from "./Login";
@@ -14,6 +15,7 @@ function App() {
   }, []);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [toLogin, setToLogin] = useState(false);
+  const [isAllBhajans, setIsAllBhajans] = useState(false);
   // const [cookie, setCookie] = useCookies(["userSaved", "username", "password"]);
   // const [checkForCookies, setCheckForCookies] = useState(true);
   // const [User, setUser] = useState();
@@ -31,7 +33,15 @@ function App() {
   return (
     <div className="App">
       <Header />
-      {toLogin ? <Login /> : isLoggedIn ? <Home /> : <Main />}
+      {toLogin ? (
+        <Login />
+      ) : isLoggedIn ? (
+        <Home />
+      ) : isAllBhajans ? (
+        <AllBhajans />
+      ) : (
+        <Main />
+      )}
       <Footer isLoggedIn={isLoggedIn} />
     </div>
   );

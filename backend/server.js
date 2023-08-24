@@ -65,12 +65,14 @@ app.get("/check-admin", async (req, res) => {
 });
 
 app.get("/get-bhajans", (req, res) => {
+  console.log("Received request");
   Bhajans.find({})
     .sort({ bhajan_no: 1 })
     .then((bhajans) => {
       if (bhajans.length !== 0) {
         res.send({
           bhajans: bhajans,
+          message: "yay",
         });
       }
     });
