@@ -31,6 +31,7 @@ function AllBhajans() {
             <tr style={{ fontSize: "1.5rem" }}>
               <th>Bhajan Name</th>
               <th>Sruthi</th>
+              <th>Deity</th>
             </tr>
           </thead>
           <tbody>
@@ -39,6 +40,7 @@ function AllBhajans() {
                 <tr>
                   <td style={{ fontWeight: "bold" }}>{bhajan.bhajan_name}</td>
                   <td style={{ fontWeight: "bold" }}>{bhajan.sruthi}</td>
+                  <td style={{ fontWeight: "bold" }}>{bhajan.deity}</td>
                 </tr>
               );
             })}

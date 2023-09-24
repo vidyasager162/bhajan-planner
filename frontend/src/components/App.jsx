@@ -112,6 +112,16 @@ function App() {
     setToLogin(true);
   }
 
+  function goHome() {
+    setIsAllBhajans(false);
+    setToLogin(false);
+  }
+
+  function goMain() {
+    setIsAllBhajans(false);
+    setToLogin(false);
+  }
+
   function logOut() {
     setIsLoggedIn(false);
     setUser({});
@@ -123,7 +133,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header isLoggedIn={isLoggedIn} goHome={goHome} goMain={goMain} />
       {toLogin ? (
         <Login handleLogin={handleLogin} />
       ) : isLoggedIn ? (

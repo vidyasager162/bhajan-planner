@@ -36,6 +36,7 @@ const memberSchema = new mongoose.Schema({
 const bhajanSchema = new mongoose.Schema({
   bhajan_no: Number,
   bhajan_name: String,
+  deity: String,
   sruthi: String,
 });
 
@@ -98,6 +99,7 @@ app.post("/add-cohort", (req, res) => {
           Bhajans.create({
             bhajan_no: number + i,
             bhajan_name: req.body.payload[i].bhajan_name,
+            deity: req.body.payload[i].deity,
             sruthi: req.body.payload[i].sruthi,
           }).then(() => {
             // console.log("Added Bhajan Succesfully");

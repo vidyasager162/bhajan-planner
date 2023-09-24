@@ -13,9 +13,6 @@ code {
     monospace;
 }
 
-h1 {
-}
-
 nav {
   background-color: #e94a35;
   display: inline-block;
@@ -64,6 +61,10 @@ table {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin-top: 3rem;
   margin-bottom: 3rem;
+}
+
+.home-button {
+  color: #f6f1f1;
 }
 
 .logout-button {

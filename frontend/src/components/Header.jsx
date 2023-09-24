@@ -1,10 +1,17 @@
 import React from "react";
 
-function Header() {
+function Header(props) {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
-        <h1 className="navbar-brand">Bhajan Planner MDH</h1>
+        <button
+          className="navbar-brand btn btn-lg btn-transparent home-button"
+          onClick={() => {
+            props.isLoggedIn ? props.goHome() : props.goMain();
+          }}
+        >
+          Bhajan Planner MDH
+        </button>
         <button
           className="navbar-toggler"
           type="button"
