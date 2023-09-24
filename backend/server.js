@@ -67,7 +67,7 @@ app.get("/check-admin", async (req, res) => {
 app.get("/get-bhajans", (req, res) => {
   console.log("Received request");
   Bhajans.find({})
-    .sort({ bhajan_no: 1 })
+    .sort({ bhajan_name: 1 })
     .then((bhajans) => {
       if (bhajans.length !== 0) {
         res.send({
@@ -108,6 +108,60 @@ app.post("/add-cohort", (req, res) => {
   }
   res.send({ message: "success" });
 });
+
+app.post("/login", (req, res) => {
+  Members.findOne({ username: req.body.username }).then(async (userFound) => {
+    if (!userFound) {
+      res.send({
+        message: 401,
+      });
+    } else {
+      bcrypt.compare(
+        req.body.password,
+        userFound.password,
+        function (err, result) {
+          if (result === true) {
+            userFound.cookieID = req.body.cookieID;
+            userFound.save();
+            res.send({
+              message: 200,
+              user: userFound,
+            });
+          } else {
+            res.send({
+              message: 401,
+            });
+          }
+        }
+      );
+    }
+  });
+});
+
+app.post("/retain-session", (req, res) => {
+  Members.findOne({ username: req.body.username }).then((userFound) => {
+    if (userFound) {
+      if (userFound.cookieID === req.body.cookieID) {
+        res.send({
+          message: 200,
+          user: userFound,
+        });
+      } else {
+        res.send({
+          message: 401,
+        });
+      }
+    } else {
+      res.send({
+        message: 401,
+      });
+    }
+  });
+});
+
+// Bhajans.deleteMany({}).then((err) => {
+//   if (err) throw err;
+// });
 
 // app.post("/add-bhajan", (req, res) => {
 //   console.log(req.body);

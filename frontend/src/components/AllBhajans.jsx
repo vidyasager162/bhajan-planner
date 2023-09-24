@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import BhajanCard from "./BhajanCard";
 
 function AllBhajans() {
   const [bhajans, setBhajans] = useState();
@@ -25,15 +24,26 @@ function AllBhajans() {
       });
   }
   return message ? (
-    <div className="container">
+    <div className="container table-responsive p-5">
       <div className="row m-0 allbhajan-container">
-        {bhajans.map((bhajan) => {
-          return (
-            <div className="col main-options">
-              <BhajanCard name={bhajan.bhajan_name} sruthi={bhajan.sruthi} />
-            </div>
-          );
-        })}
+        <table className="table table-light table-bordered m-auto">
+          <thead>
+            <tr style={{ fontSize: "1.5rem" }}>
+              <th>Bhajan Name</th>
+              <th>Sruthi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bhajans.map((bhajan) => {
+              return (
+                <tr>
+                  <td style={{ fontWeight: "bold" }}>{bhajan.bhajan_name}</td>
+                  <td style={{ fontWeight: "bold" }}>{bhajan.sruthi}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   ) : null;
